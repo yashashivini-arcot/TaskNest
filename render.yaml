@@ -1,7 +1,7 @@
 services:
   - type: web
     name: tasknest-web
-    env: node
+    runtime: node
     buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install
     startCommand: cd backend && node index.js
     envVars:
@@ -10,4 +10,4 @@ services:
       - key: JWT_SECRET
         value: tasknest_super_secret_jwt_2024_xyz
       - key: FRONTEND_URL
-        value: https://tasknest-web.onrender.com
+        value: https://tasknest-1-k5lf.onrender.com
