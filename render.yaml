@@ -12,6 +12,6 @@ services:
       - key: JWT_SECRET
         generateValue: true
 
-  - type: psql
+  - type: pgsql
     name: tasknest-db
     plan: free
