@@ -6,12 +6,8 @@ services:
     startCommand: cd backend && node index.js
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: tasknest-db
-          property: connectionString
+        value: postgresql://tasknest_db_tmsz_user:mP7Aegx1H1nihTbgfwifNV94fX5LnWqD@dpg-d7jip82qqhas73d29b2g-a/tasknest_db_tmsz
       - key: JWT_SECRET
-        generateValue: true
-
-  - type: pgsql
-    name: tasknest-db
-    plan: free
+        value: tasknest_super_secret_jwt_2024_xyz
+      - key: FRONTEND_URL
+        value: https://tasknest-web.onrender.com
