@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* 
+## ✨ Premium Light Mode Refinement
+The light mode transition is now refined for maximum visual comfort and elegance:
+- **Icy-Blue Palette**: Pure white backgrounds have been replaced with **Ice Blue (#EEF4FF)** and **Light Bluish Grey (#EAF0F6)**, reducing eye strain and creating a modern feel.
+- **Soft-Toned Elevation**: Cards and modals now use a soft **F8FAFC** background with diffused shadows and large **32px rounded corners**, giving the UI a premium "glassmorphism" depth.
+- **Dynamic Contrast**: Standardized on **Dark Slate (#1F2937)** for primary text, ensuring perfect legibility across both themes without the harshness of pure black.
+- **Institution Muted**: The core colors (Midnight Blue, Coral, Teal) are now muted in light mode to feel naturally integrated into the softer backdrop.
+*/
+
+:root {
+  /* Institutional Palette Tones (Refined) */
+  --palette-midnight-dark: #0B1F3A;
+  --palette-midnight-soft: #1E3A5F;
+  --palette-coral-bold: #FF6B6B;
+  --palette-coral-soft: #FF8A8A;
+  --palette-teal-bold: #14B8A6;
+  --palette-teal-soft: #5FD1C8;
+  
+  /* Light Mode (Premium Soft) */
+  --color-primary: #EEF4FF;       /* Ice Blue */
+  --color-secondary-bg: #EAF0F6;  /* Light Bluish Grey */
+  --color-card-bg: #F8FAFC;       /* Soft Elevated Card */
+  --color-text-main: #1F2937;     /* Dark Slate */
+  --color-text-muted: #6B7280;    /* Soft Grey-Blue */
+  --color-border-card: rgba(30, 58, 95, 0.08); /* Midnight Blue tint */
+  --shadow-soft: 0 10px 40px -12px rgba(30, 58, 95, 0.08);
+
+  /* Student Accents - Light Mode (Muted) */
+  --color-accent: var(--palette-coral-soft);
+  --color-contrast: var(--palette-teal-soft);
+}
+
+.dark {
+  /* Dark Mode (Override) */
+  --color-primary: var(--palette-midnight-dark);
+  --color-secondary-bg: #132A46;
+  --color-card-bg: #1A2E4A;
+  --color-text-main: #F3F4F6;
+  --color-text-muted: #9CA3AF;
+  --color-border-card: rgba(255, 255, 255, 0.05);
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+
+  /* Student Accents - Dark Mode */
+  --color-accent: var(--palette-coral-bold);
+  --color-contrast: var(--palette-teal-bold);
+}
+
+/* Faculty Role Overrides */
+.theme-faculty:not(.dark) {
+  --color-accent: var(--palette-teal-soft);
+  --color-contrast: var(--palette-coral-soft);
+}
+
+.theme-faculty.dark {
+  --color-accent: var(--palette-teal-bold);
+  --color-contrast: var(--palette-coral-bold);
+}
+
+@theme {
+  --font-sans: "Sora", sans-serif;
+  --color-primary: var(--color-primary);
+  --color-secondary-bg: var(--color-secondary-bg);
+  --color-card-bg: var(--color-card-bg);
+  --color-accent: var(--color-accent);
+  --color-contrast: var(--color-contrast);
+  --color-text-main: var(--color-text-main);
+  --color-text-muted: var(--color-text-muted);
+  --color-border-card: var(--color-border-card);
+  
+  --radius-card: 12px;
+  --shadow-soft: var(--shadow-soft);
+}
+
+@layer base {
+  * {
+    @apply transition-colors duration-500;
+  }
+  body {
+    @apply bg-primary text-text-main font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-5 py-2.5 rounded-xl font-bold transition-all duration-300 active:scale-95 disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-accent/90 shadow-lg shadow-accent/20;
+  }
+  .btn-secondary {
+    @apply bg-contrast text-white hover:bg-contrast/90 shadow-lg shadow-contrast/20;
+  }
+  .btn-ghost {
+    @apply bg-white/5 text-text-main hover:bg-white/10;
+  }
+  .nav-link {
+    @apply text-sm font-medium text-text-muted hover:text-white transition-colors py-2 px-4 rounded-lg;
+  }
+  .nav-link-active {
+    @apply text-white bg-white/10;
+  }
+  .section-container {
+    @apply bg-card-bg rounded-3xl p-8 border border-border-card shadow-soft;
+  }
+  .row-item {
+    @apply flex items-center p-5 rounded-2xl hover:bg-secondary-bg transition-all border border-transparent hover:border-border-card;
+  }
+}
+
+@keyframes highlight-pulse {
+  0% { border-color: var(--color-border-card); }
+  50% { border-color: var(--color-accent); box-shadow: 0 0 15px -5px var(--color-accent); }
+  100% { border-color: var(--color-border-card); }
+}
+
+.animate-highlight {
+  animation: highlight-pulse 2s ease-in-out infinite;
+}
